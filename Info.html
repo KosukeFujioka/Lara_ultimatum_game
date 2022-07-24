@@ -1,0 +1,25 @@
+{{ block title }}
+    information
+{{ endblock }}
+{{ block content }}
+
+
+    <p>The number of correct answers in {{ C.PROPOSER_ROLE }}'s quiz is 
+        {{ group.q_p }}.</p>
+    <p>{{ C.PROPOSER_ROLE }}'s number of points per question is 
+        {{ group.a_p }}.</p>
+    <p>As a result, {{ C.PROPOSER_ROLE }}'s earning is {{ group.pie_p }}.</p>
+
+    <p>The number of correct answers in {{ C.RESPONDER_ROLE }}'s quiz is 
+        {{ group.q_r }}.</p>
+    <p>{{ C.RESPONDER_ROLE }}'s number of points per question is 
+        {{ group.a_r }}.</p>
+    <p>As a result, {{ C.RESPONDER_ROLE }}'s earning is {{ group.pie_r }}.</p>
+
+    <p>The total pie of your group is  {{ group.pie_tot }}. </p>
+
+
+    {{ next_button }}
+
+
+{{ endblock }}

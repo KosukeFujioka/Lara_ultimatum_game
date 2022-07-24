@@ -1,0 +1,39 @@
+{{ block title }}
+    Results
+{{ endblock }}
+
+{{ block content }}
+
+    {{ for res in results }}
+        <div>
+            <p>Scenario{{ forloop.counter }}:</p>
+            <p>{{ C.PROPOSER_ROLE }}'s suggestion is {{ res.offer_p }}.</p>
+            <p>{{ C.RESPONDER_ROLE }}'s suggestion is {{ res.offer_r }}.</p>
+            <p>
+                By {{ C.RESPONDER_ROLE }}, {{ C.PROPOSER_ROLE }} is
+                {{ if res.accepted }}
+                    accepted.
+                {{ else }}
+                    rejected.
+                {{ endif }}
+            </p>
+            <!-- <p>
+                {{ C.PROPOSER_ROLE }}の提案は，{{ C.RESPONDER_ROLE }}によって
+                {{ if res.accepted }}
+                    受諾されました．
+                {{ else }}
+                    拒否されました．
+                {{ endif }}
+            </p> -->
+            <p>On the scenario {{ forloop.counter }}, your payoff is  {{ res.payoff_tmp }}. </p>
+        </div>
+    {{ endfor }}
+
+    <div>
+        <p>The scenario {{ chosen_scenario }} is chosen for the subject to
+            reward payment.
+        </p>
+        <p>Your reward is {{ player.payoff }}.</p>
+    </div>
+
+{{ endblock }}

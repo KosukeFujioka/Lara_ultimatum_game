@@ -1,0 +1,69 @@
+{{ block title }}
+    Scenario{{ scenarionum }}
+{{ endblock }}
+
+{{ block content }}
+
+    <p>You are the  {{ role }}.</p>
+
+    {{ if scenario == "ult" }}
+        <p>Explanation for the ultimatum game</p>
+    {{ else }}
+        <p>Explanation for the no-veto-cost game</p>
+    {{ endif }}
+
+    <p>{{ C.PROPOSER_ROLE }}'s earning is {{ group.pie_p }}.</p>
+
+    <p>{{ C.RESPONDER_ROLE }}'s earning is {{ group.pie_r }}.</p>
+
+    <p>The total pie of your group is {{ group.pie_tot }}.</p>
+
+    {{ if role == C.PROPOSER_ROLE }}
+        <p>Determine the contribution to {{ C.RESPONDER_ROLE }}.</p>
+    {{ else }}
+        <p>Determine the minimum contribution which is acceptable from {{ C.PROPOSER_ROLE }}.</p>
+    {{ endif }}
+
+    {{ for eachfield in form }}
+        <div class="row align-items-center justify-content-center">
+            <div class="col">
+                <p class="text-end">
+                    {{ C.PROPOSER_ROLE }}:
+                    <br>
+                    <span id="proposer">&nbsp;</span>
+                </p>
+            </div>
+            <div class="col-6">
+                <input type="range" class="form-range" id="myslider" name="{{ eachfield.name }}" min="0" max="{{ group.pie_tot }}" value="0">
+            </div>
+            <div class="col">
+                <p class="text-start">
+                    {{ C.RESPONDER_ROLE }}:
+                    <br>
+                    <span id="responder">&nbsp;</span>
+                </p>
+            </div>
+        </div>
+    {{ endfor }}
+
+    {{ next_button }}
+
+{{ endblock }}
+
+{{ block scripts }}
+<script>
+    function update_disp() {
+        const el = document.getElementById("myslider");
+        const maxval = parseFloat(el.max);
+        const responder = parseFloat(el.value);
+        const proposer = maxval - responder;
+
+        document.getElementById("proposer").innerText = proposer;
+        document.getElementById("responder").innerText = responder;
+    }
+
+    window.onload = function() {
+        document.getElementById('myslider').addEventListener('input', update_disp);
+    };
+</script>
+{{ endblock }}
